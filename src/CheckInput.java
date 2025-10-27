@@ -31,7 +31,7 @@ public class CheckInput {
 
     System.out.print("Введите фамилию (можно оставить пустой): ");
     while (true) {
-      lastName = scanner.nextLine().trim();
+      lastName = scanner.nextLine();
       if (lastName.isEmpty()) {
         lastName = null;
         break;
@@ -44,7 +44,7 @@ public class CheckInput {
 
     System.out.print("Введите имя (обязательно): ");
     while (true) {
-      firstName = scanner.nextLine().trim();
+      firstName = scanner.nextLine();
       if (firstName.isEmpty()) {
         System.out.print("Имя не может быть пустым. Введите имя: ");
       } else if (firstName.matches(".*\\d.*")) {
@@ -69,7 +69,7 @@ public class CheckInput {
     }
 
     Name name = new Name(lastName, firstName, patronymic);
-    System.out.println("Создан объект: " + name);
+    System.out.println("Создан объект: " + name.toString());
     return name;
   }
 
@@ -91,7 +91,7 @@ public class CheckInput {
       }
     }
     PersonWithName person = new PersonWithName(name, height);
-    System.out.println("Создан человек: " + person);
+    System.out.println("Создан человек: " + person.toString());
     return person;
   }
 
@@ -151,7 +151,7 @@ public class CheckInput {
 
   public static Cat catByHand(Scanner scanner) {
     System.out.print("Введите имя кота: ");
-    String catName = scanner.nextLine().trim();
+    String catName = scanner.nextLine();
     if (catName.isEmpty()) {
       System.out.println("Имя не может быть пустым. Используем 'Безымянный'.");
       catName = "Безымянный";

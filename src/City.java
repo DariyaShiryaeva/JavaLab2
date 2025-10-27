@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class City {
 
-  private String name;                    // Название города
-  private ArrayList<City> targetCities;   // Города, в которые можно попасть
-  private ArrayList<Integer> costs;       // Стоимость маршрута до каждого города
+  private String name;
+  private ArrayList<City> targetCities;
+  private ArrayList<Integer> costs;
 
   // Конструктор
   public City(String name) {

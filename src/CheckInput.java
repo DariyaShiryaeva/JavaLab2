@@ -54,7 +54,6 @@ public class CheckInput {
       }
     }
 
-    // Ввод отчества
     System.out.print("Введите отчество (можно оставить пустым): ");
     while (true) {
       patronymic = scanner.nextLine().trim();
@@ -104,6 +103,11 @@ public class CheckInput {
 
       if (name.isEmpty()) {
         break;
+      }
+
+      if (name.matches(".*\\d.*")) {
+        System.out.println("Ошибка: название города не должно содержать цифры. Повторите ввод.");
+        continue;
       }
 
       City city = new City(name);

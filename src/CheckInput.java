@@ -1,8 +1,10 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+/** Утилитарный класс для проверки и обработки пользовательского ввода. */
 public class CheckInput {
 
+  /** Проверяет, является ли строка целым числом. */
   public static boolean isInteger(String str) {
     try {
       Integer.parseInt(str);
@@ -12,22 +14,26 @@ public class CheckInput {
     }
   }
 
+  /** Запрашивает у пользователя подтверждение (y/n). */
   public static String getYN(Scanner scanner) {
     System.out.println("Хотите попробовать создать объекты самостоятельно? (y/n)");
-    String m;
+    String input;
     while (true) {
-      m = scanner.nextLine();
-      if (m.equalsIgnoreCase("y") || m.equalsIgnoreCase("n")) {
+      input = scanner.nextLine();
+      if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("n")) {
         break;
       } else {
         System.out.println("Ошибка! Введите y или n.");
       }
     }
-    return m;
+    return input;
   }
 
+  /** Создает объект Name на основе ручного ввода. */
   public static Name nameByHand(Scanner scanner) {
-    String lastName, firstName, patronymic;
+    String lastName;
+    String firstName;
+    String patronymic;
 
     System.out.print("Введите фамилию (можно оставить пустой): ");
     while (true) {
@@ -72,6 +78,7 @@ public class CheckInput {
     return name;
   }
 
+  /** Создает объект PersonWithName на основе ручного ввода. */
   public static PersonWithName pwnByHand(Scanner scanner) {
     Name name = nameByHand(scanner);
     int height = 0;
@@ -94,6 +101,7 @@ public class CheckInput {
     return person;
   }
 
+  /** Создает список городов и настраивает маршруты между ними. */
   public static ArrayList<City> citiesByHand(Scanner scanner) {
     ArrayList<City> cities = new ArrayList<>();
     System.out.println("Создание списка городов ");
@@ -106,7 +114,7 @@ public class CheckInput {
       }
 
       if (name.matches(".*\\d.*")) {
-        System.out.println("Ошибка: название города не должно содержать цифры. Повторите ввод.");
+        System.out.println("Ошибка: название города не должно содержать цифры.");
         continue;
       }
 
@@ -126,11 +134,13 @@ public class CheckInput {
 
       for (City toCity : cities) {
         if (toCity == fromCity) {
-          continue; // маршрут в самого себя
+          continue; // Маршрут в самого себя не создаем
         }
 
-        System.out.print("Введите стоимость поездки до города " + toCity.getName()
-            + " (0 — если маршрута нет): ");
+        System.out.print(
+            "Введите стоимость поездки до города "
+                + toCity.getName()
+                + " (0 — если маршрута нет): ");
 
         String input = scanner.nextLine();
         if (input.isEmpty()) {
@@ -141,8 +151,8 @@ public class CheckInput {
           int cost = Integer.parseInt(input);
           if (cost > 0) {
             fromCity.addRoute(toCity, cost);
-            System.out.println("Добавлен маршрут: " + fromCity.getName()
-                + " -> " + toCity.getName() + " : " + cost);
+            System.out.println(
+                "Добавлен маршрут: " + fromCity.getName() + " -> " + toCity.getName() + " : " + cost);
           }
         } catch (NumberFormatException e) {
           System.out.println("Некорректное значение. Пропускаем.");
@@ -153,6 +163,7 @@ public class CheckInput {
     return cities;
   }
 
+  /** Создает объект Cat на основе ручного ввода. */
   public static Cat catByHand(Scanner scanner) {
     System.out.print("Введите имя кота: ");
     String catName = scanner.nextLine();
@@ -162,5 +173,4 @@ public class CheckInput {
     }
     return new Cat(catName);
   }
-
 }

@@ -1,39 +1,47 @@
+/**
+ * Представляет человека, обладающего именем (объект Name), ростом и информацией об отце.
+ */
 public class PersonWithName {
 
   private Name name;
   private int height;
   private PersonWithName father;
 
-  // Приватный конструктор для централизованного присвоения
+  /**
+   * Основной конструктор для централизованного присвоения.
+   */
   public PersonWithName(Name name, int height, PersonWithName father) {
-    this.name = name != null ? name : new Name();
+    this.name = (name != null) ? name : new Name();
     this.height = (height > 0 && height < 300) ? height : 0;
     this.father = father;
-    if (father != null) {
+    if (this.father != null) {
       inheritFromFather();
     }
   }
 
-  // Конструкторы
+  /** Создает человека по имени (строка) и росту. */
   public PersonWithName(String firstName, int height) {
     this(new Name(firstName), height, null);
   }
 
+  /** Создает человека по имени (строка), росту и объекту отца. */
   public PersonWithName(String firstName, int height, PersonWithName father) {
     this(new Name(firstName), height, father);
   }
 
+  /** Создает человека по объекту Name и росту. */
   public PersonWithName(Name name, int height) {
     this(name, height, null);
   }
 
   // Геттеры и сеттеры
+
   public Name getName() {
     return name;
   }
 
   public void setName(Name name) {
-    this.name = name != null ? name : new Name();
+    this.name = (name != null) ? name : new Name();
   }
 
   public int getHeight() {
@@ -55,21 +63,21 @@ public class PersonWithName {
     }
   }
 
-  // Наследование фамилии и отчества от отца
+  /** Наследование фамилии и отчества от отца. */
   private void inheritFromFather() {
     if (father != null && father.name != null) {
-      // Наследуем фамилию
+      // Наследуем фамилию, если её нет
       if (!name.hasLastName() && father.name.hasLastName()) {
         name.setLastName(father.name.getLastName());
       }
-      // Наследуем отчество
+      // Наследуем отчество, если его нет
       if (!name.hasPatronymic() && father.name.hasFirstName()) {
         name.setPatronymic(generatePatronymic(father.name.getFirstName()));
       }
     }
   }
 
-  // Генерация отчества по имени отца
+  /** Генерация отчества по имени отца. */
   private String generatePatronymic(String fathersName) {
     if (fathersName == null || fathersName.isEmpty()) {
       return null;

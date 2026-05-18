@@ -1,29 +1,39 @@
 import java.util.ArrayList;
 
+/** Представляет город как узел в графе с маршрутами и их стоимостью. */
 public class City {
 
   private String name;
-  private ArrayList<City> targetCities;
-  private ArrayList<Integer> costs;
+  private final ArrayList<City> targetCities;
+  private final ArrayList<Integer> costs;
 
-  // Конструктор
+  /**
+   * Конструктор города.
+   *
+   * @param name Название города.
+   */
   public City(String name) {
     this.name = name;
     this.targetCities = new ArrayList<>();
     this.costs = new ArrayList<>();
   }
 
-  // Геттер для имени города
+  /** Возвращает название города. */
   public String getName() {
     return name;
   }
 
-  // Сеттер для имени города (если нужно изменить)
+  /** Устанавливает название города. */
   public void setName(String name) {
     this.name = name;
   }
 
-  // Добавление маршрута к другому городу
+  /**
+   * Добавляет маршрут к другому городу.
+   *
+   * @param targetCity Город назначения.
+   * @param cost Стоимость поездки (должна быть больше 0).
+   */
   public void addRoute(City targetCity, int cost) {
     if (targetCity != null && targetCity != this && cost > 0) {
       targetCities.add(targetCity);
@@ -31,27 +41,31 @@ public class City {
     }
   }
 
-  // Получение стоимости маршрута до конкретного города
+  /**
+   * Возвращает стоимость маршрута до конкретного города.
+   *
+   * @param targetCity Город назначения.
+   * @return Стоимость маршрута или null, если пути не существует.
+   */
   public Integer getRouteCost(City targetCity) {
     for (int i = 0; i < targetCities.size(); i++) {
       if (targetCities.get(i) == targetCity) {
         return costs.get(i);
       }
     }
-    return null; // если маршрута нет
+    return null;
   }
 
-  // Получение списка всех целевых городов
+  /** Возвращает список всех доступных из данного города направлений. */
   public ArrayList<City> getTargetCities() {
     return targetCities;
   }
 
-  // Получение списка стоимостей маршрутов
+  /** Возвращает список стоимостей всех маршрутов. */
   public ArrayList<Integer> getCosts() {
     return costs;
   }
 
-  // Вывод всех маршрутов в виде строки
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -63,9 +77,7 @@ public class City {
         if (i > 0) {
           sb.append(", ");
         }
-        sb.append(targetCities.get(i).getName())
-            .append(":")
-            .append(costs.get(i));
+        sb.append(targetCities.get(i).getName()).append(":").append(costs.get(i));
       }
     } else {
       sb.append(" (нет маршрутов)");

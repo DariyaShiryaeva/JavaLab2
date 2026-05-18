@@ -1,24 +1,27 @@
 public class Cat {
 
-  private String name;
+  private final String name;
 
-  // Конструктор с именем
+  /** Конструктор с именем. */
   public Cat(String name) {
     this.name = name;
   }
 
-  // Приведение к строковой форме
   @Override
   public String toString() {
     return "кот: " + name;
   }
 
-  // Мяукнуть один раз
+  /** Мяукнуть один раз. */
   public void meow() {
     System.out.println(name + ": мяу!");
   }
 
-  // Мяукнуть N раз
+  /**
+   * Мяукнуть N раз.
+   *
+   * @param n количество повторений "мяу".
+   */
   public void meow(int n) {
     if (n <= 0) {
       System.out.println(name + ": ");
